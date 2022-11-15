@@ -10,8 +10,8 @@ https://support.hp.com/cn-zh/document/c06498444
 
 ## 注意
 本人的 傲腾SSD 支持安装 Ventura 可以按照流程制作 nvme.aml 补丁，其实就在 EFI -> OC -> ACPI 里。  
-本人已经将intel网卡替换成了拨通网卡Broadcom BCM43224AG 802.11a/b/g/draft-n Wireless Network Adapter PCI  
-网卡配置如下：  
+本人已经将intel网卡替换成了 博通网卡 Broadcom BCM43224AG 802.11a/b/g/draft-n Wireless Network Adapter PCI 然而买错了不能免驱  
+所以网卡配置如下：  
 <img width="964" alt="image" src="https://user-images.githubusercontent.com/94947393/201841163-97df13ad-4a79-4dab-af6b-25089f28a4b2.png">
 
 
