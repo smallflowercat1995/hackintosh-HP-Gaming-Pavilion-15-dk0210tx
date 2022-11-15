@@ -1,0 +1,45 @@
+请参考官方文档：
+    https://dortania.github.io/OpenCore-Install-Guide/find-hardware.html#finding-hardware-using-windows
+
+CPU Model
+    Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz
+    Coffee Lake-H
+
+GPU Model
+    Intel UHD Graphics 630
+    nVIDIA GeForce GTX 1650
+
+Chipset Model
+    Intel(R) 300 Series Chipset Family LPC Controller (HM370) - A30D
+
+Keyboard, Trackpad and Touchscreen Connection Type
+    SMBus
+        Synaptics SMBus Driver
+            \_SB.PCI0.SBUS
+
+    USB 输入设备
+        HID-compliant mouse
+
+    I2C HID 设备
+        ELAN HID Class Filter Driver
+        ELAN PrecisionTouchpad Filter Driver
+        ELAN Input Device
+        Microsoft Input Configuration Device
+
+    PS/2 标准键盘
+
+    HP Wireless Button Driver
+        符合 HID 标准的无线通信控制
+
+Audio Codec
+    Intel Kaby Lake HDMI @ Intel Cannon Point PCH - cAVS (Audio, Voice, Speech) [B0]	PCI
+    nVIDIA TU117 HDMI/DP @ nVIDIA TU117 - High Definition Audio Controller	PCI
+    Realtek ALC285 @ Intel Cannon Point PCH - cAVS (Audio, Voice, Speech) [B0]	PCI
+
+Network Controller models
+    Broadcom BCM43224AG 802.11a/b/g/draft-n Wireless Network Adapter	PCI
+    Realtek RTL8168/8111 PCI-E Gigabit Ethernet Adapter (PHY: Realtek RTL8111)	PCI
+
+Drive Model
+    INTEL HBRPEKNX0202AH
+

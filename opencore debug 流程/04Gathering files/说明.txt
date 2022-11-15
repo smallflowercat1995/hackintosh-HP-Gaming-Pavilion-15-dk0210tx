@@ -1,0 +1,128 @@
+请参考官方文档：
+    https://dortania.github.io/OpenCore-Install-Guide/ktext.html
+
+builds
+    https://dortania.github.io/builds/
+
+SSDTTime
+    https://github.com/corpnewt/SSDTTime
+
+USBToolBox/kext
+    https://github.com/USBToolBox/kext
+
+USBToolBox/tool
+    https://github.com/USBToolBox/tool
+
+Firmware Drivers
+Universal
+    HfsPlus.efi
+        https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi
+    
+Kexts
+Must haves
+    Lilu
+        https://github.com/acidanthera/Lilu/releases
+
+    VirtualSMC
+        https://github.com/acidanthera/VirtualSMC/releases
+
+Graphics
+    WhateverGreen
+        https://github.com/acidanthera/WhateverGreen/releases
+
+Audio
+    AppleALC
+        https://github.com/acidanthera/AppleALC/releases
+
+Ethernet
+    RealtekRTL8111
+        https://github.com/Mieze/RTL8111_driver_for_OS_X/releases
+
+USB
+    USBToolBox
+        https://github.com/USBToolBox/tool/releases
+        https://github.com/USBToolBox/kext/releases
+
+WiFi and Bluetooth
+Broadcom
+    AirportBrcmFixup
+        https://github.com/acidanthera/AirportBrcmFixup/releases
+
+    BrcmPatchRAM
+        https://github.com/acidanthera/BrcmPatchRAM/releases
+
+Extras
+
+
+Laptop Input
+PS2 Keyboards/Trackpads
+    VoodooPS2
+        https://github.com/acidanthera/VoodooPS2/releases
+
+SMBus Trackpads
+    VoodooRMI
+        https://github.com/VoodooSMBus/VoodooRMI/releases
+	    https://github.com/VoodooSMBus/VoodooSMBus
+
+I2C/USB HID Devices
+    VoodooI2C
+        https://github.com/VoodooI2C/VoodooI2C/releases
+
+Misc
+    ECEnabler
+        https://github.com/1Revenger1/ECEnabler/releases
+
+    BrightnessKeys
+        https://github.com/acidanthera/BrightnessKeys/releases
+
+Laptop
+Coffee Lake (9th Gen)
+    SSDTTime
+        https://github.com/corpnewt/SSDTTime
+        P. Dump DSDT
+        # 生成 aml 文件位置 Results 
+
+        SSDT-XOSI
+            A. XOSI
+            根据自己的电脑系统版本选择 22. Windows 11, version 22H2 (Windows 2022)
+
+        SSDT-PNLF
+            0. PNLF
+            根据CPU型号选择 19  | CoffeeLake and newer            | 0xFFFF
+
+        SSDT-HPET.aml
+            1. FixHPET
+            默认即可
+
+        SSDT-EC-USBX
+            3. FakeEC Laptop
+
+        SSDT-USBX
+            4. USBX
+
+        SSDT-PLUG 
+            5. PluginType
+
+        SSDT-PMC
+            6. PMC
+
+        SSDT-AWAC
+            7. AWAC
+
+        SSDT-USB-Reset
+            8. USB Reset
+
+        SSDT-Bridge
+            9. PCI Bridge
+            输入 MAC 的路径 PciRoot(0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
+
+
+        SSDT-XOSI
+            A. XOSI
+            21. Windows 11 (Windows 2021)
+
+        SSDT-PNLF
+            https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-PNLF.aml
+
+        SSDT-GPI0
+            需要 MacOS 环境检测修补，触摸板不工作可以用鼠标代替

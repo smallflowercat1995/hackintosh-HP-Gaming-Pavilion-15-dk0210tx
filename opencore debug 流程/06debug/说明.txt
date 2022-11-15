@@ -1,0 +1,137 @@
+遇到问题：
+卡住[EB|#LOG:EXITBS:START]
+    https://dortania.github.io/OpenCore-Install-Guide/troubleshooting/extended/kernel-issues.html#stuck-on-eb-log-exitbs-start
+
+尝试：
+# https://dortania.github.io/OpenCore-Install-Guide/extras/kaslr-fix.html#using-devirtualisemmio
+
+Booter
+Quirks
+    DevirtualiseMmio boolean NO
+    RebuildAppleMemoryMap boolean NO
+
+Misc
+Security
+    SecureBootModel string Disabled
+
+# 发现报错IONVMEFamily，傲腾SSD配置
+# 模板：https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/Spoof-SSDT.dsl
+# SSDT-NVME.dsl -> SSDT-NVME.aml
+DefinitionBlock ("", "SSDT", 2, "hack", "NVMe-Pcc", 0x00000000)
+{
+    External (_SB_.PCI0.RP11.PXSX, DeviceObj)
+
+    Method (_SB.PCI0.RP11.PXSX._DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
+    {
+        If (!Arg2)
+        {
+            Return (Buffer (One)
+            {
+                 0x03                                             // .
+            })
+        }
+
+        Return (Package (0x04)
+        {
+            "class-code", 
+            Buffer (0x04)
+            {
+                 0xFF, 0x08, 0x01, 0x00                           // ....
+            }, 
+
+            "built-in", 
+            Buffer (One)
+            {
+                 0x00                                             // .
+            }
+        })
+    }
+}
+
+# 成功进入MacOS之后，配置
+# 使用hackintosh核显驱动
+# 使用hackintosh定制USB端口驱动，注意定制端口会产生 SSDT-USBX 可以不需要，因为已经在第四步生成了
+
+# 设备属性显卡里要移除掉 Internet@0,2,0 启用 H.265 编解码
+# 加上 enable-backlight-registers-fix 和 enable-backlight-smoother DATA类型 01000000
+DeviceProperties
+Add 
+# Laptop Recommended value for UHD 630
+    PciRoot(0x0)/Pci(0x2,0x0)
+        enable-backlight-registers-fix data 01000000
+        enable-backlight-smoother data 01000000
+
+# 引导参数去掉 -igfxblr -v debug=0x100 keepsyms=1 加一个igfxfw=2
+NVRAM
+7C436110-AB2A-4BBB-A880-FE41995C9F82
+    boot-args string vsmcgen=1 igfxfw=2
+
+# 防止生成日志文件
+Misc
+Debug
+    AppleDebug boolean NO
+    DisableWatchDog boolean NO
+    Target number 0
+
+# 引导图形化
+# 下载 acidanthera/OcBinaryData 将 Resources 放到 EFI/OC/Resources
+    https://github.com/acidanthera/OcBinaryData
+# 下载 opencore 将 OpenCanopy.efi 放到 EFI/OC/Drivers
+    https://github.com/acidanthera/OpenCorePkg/releases
+Misc
+    Boot
+        PickerMode string External
+        PickerAttributes number 1
+        # 不止一个主题，自行挑选
+        PickerVariant string Acidanthera\GoldenGate
+UEFI
+    Drivers
+        OpenCanopy.efi  boolean YES
+    Output
+        # 有可能会发生主题不加载的问题，可以尝试关闭或打开此项
+        ProvideConsoleGop  boolean YES/NO
+
+# 这个可能没用，就是随便研究研究，可以跳过
+# DevirtualiseMmio:
+    尝试禁用：无效
+    尝试启用：无效
+        相关日志：
+            71:785 00:036 OCABC: MMIO devirt start
+            71:853 00:068 OCABC: MMIO devirt 0xE0000000 (0x10000 pages, 0x8000000000000001) skip 0
+            71:886 00:033 OCABC: MMIO devirt 0xFE000000 (0x11 pages, 0x8000000000000001) skip 0
+            71:919 00:032 OCABC: MMIO devirt 0xFED10000 (0xA pages, 0x8000000000000001) skip 0
+            71:952 00:032 OCABC: MMIO devirt 0xFED84000 (0x1 pages, 0x8000000000000001) skip 0
+            71:985 00:033 OCABC: MMIO devirt 0xFEE00000 (0x1 pages, 0x8000000000000001) skip 0
+            72:018 00:033 OCABC: MMIO devirt 0xFF300000 (0xD00 pages, 0x8000000000000001) skip 0
+            72:051 00:032 OCABC: MMIO devirt end, saved 275572 KB
+        转10进制：
+            0xE0000000 (0x10000 pages, 0x8000000000000001) -> 3758096384
+            0xFE000000 (0x11 pages, 0x8000000000000001) -> 4261412864
+            0xFED10000 (0xA pages, 0x8000000000000001) -> 4275109888
+            0xFED84000 (0x1 pages, 0x8000000000000001) -> 4275585024
+            0xFEE00000 (0x1 pages, 0x8000000000000001) -> 4276092928
+            0xFF300000 (0xD00 pages, 0x8000000000000001) -> 4281335808
+        补充到 config.plist 的 MmioWhitelist 中测试：
+            Address number 3758096384
+            Comment string 0xE0000000 (0x10000 pages, 0x8000000000000001)
+            Enabled boolean true
+
+            Address number 4261412864
+            Comment string 0xFE000000 (0x11 pages, 0x8000000000000001)
+            Enabled boolean true
+
+            Address number 4275109888
+            Comment string 0xFED10000 (0xA pages, 0x8000000000000001)
+            Enabled boolean true
+
+            Address number 4275585024
+            Comment string 0xFED84000 (0x1 pages, 0x8000000000000001)
+            Enabled boolean true
+
+            Address number 4276092928
+            Comment string 0xFEE00000 (0x1 pages, 0x8000000000000001)
+            Enabled boolean true
+
+            Address number 4281335808
+            Comment string 0xFF300000 (0xD00 pages, 0x8000000000000001)
+            Enabled boolean true
