@@ -9,4 +9,4 @@
 https://support.hp.com/cn-zh/document/c06498444  
 
 ## 声明
-对于 `opencore debug 流程` 请斟酌参考，若参考某流程导致机毁人亡，本人不敢也没能力格承担责任，实在抱歉
+对于 `opencore debug 流程` 请斟酌参考，若参考某流程导致机毁人亡，本人不敢也没能力承担责任，实在抱歉
