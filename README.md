@@ -14,7 +14,7 @@ https://support.hp.com/cn-zh/document/c06498444
 所以网卡配置如下：  
 <img width="964" alt="image" src="https://user-images.githubusercontent.com/94947393/201841163-97df13ad-4a79-4dab-af6b-25089f28a4b2.png">  
 3.本机cfglock已经通过  `opencore debug 流程` -> `02DVMT cfg unlock` 步骤解锁了，并未勾选 oc 配置 `Kernel` -> `Quirks` -> `AppleXcpmCfgLock`  
-4.若你的机器没有解锁cfglocal你可以勾选 oc 配置 `Kernel` -> `Quirks` -> `AppleXcpmCfgLock`
+4.若你的机器没有解锁cfglocal你需要勾选 oc 配置 `Kernel` -> `Quirks` -> `AppleXcpmCfgLock`
 
 ## 声明
 对于 `opencore debug 流程` 请斟酌参考，若参考某流程导致机毁人亡，本人不敢也没能力承担责任，实在抱歉
