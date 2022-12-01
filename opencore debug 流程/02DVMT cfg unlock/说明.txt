@@ -31,7 +31,7 @@ bios提取
     One Of Option: Enabled, Value (8 bit): 0x1 (default) 
   然后Ctrl+F搜索: VarStore: VarStoreId: 0x3 ,这里的 0x3 就是上面 VarStore: 后面的代码
   记住 Name: 后面的字符换，很重要。每个主板都不一样，再强调一遍，为了方便理解，这里假设字符串为 CpuSetup
-  
+  现在关于cfg_lock的参数就收集到了 CpuSetup 0x3E 0x1 0x0  
 
 查找DVMT代码
   解释：
@@ -68,7 +68,7 @@ bios提取
     One Of Option: 60M, Value (8 bit): 0xFE 
   然后Ctrl+F搜索: VarStore: VarStoreId: 0x2 ,这里的 0x2 就是上面 VarStore: 后面的代码
   记住 Name: 后面的字符换，很重要。每个主板都不一样，再强调一遍，为了方便理解，这里假设字符串为 SaSetup
-  
+  现在关于DVMT的参数就收集到了 SaSetup 0x107 0x2  
   
 制作U盘
   创建目录 EFI 进入 EFI 创建 BOOT 目录，进入 BOOT 目录 
@@ -78,11 +78,12 @@ bios提取
   
 U盘引导GNU grub 修改 CFG_lock 和 DVMT
   完成后重启电脑，进主板热键启动，选择U盘启动，然后进入了工具的主页面
-  然后现在操作解锁cfg lock，将 0x1 转为 0x0 ，输入 setup_var_cv CpuSetup 0x3E 0x1 0x0 ，回车
-  然后现在操作修改 DVMT 为最大值 ，将 0x2 转为 0x2 ，输入  setup_var_cv SaSetup 0x107 0x2 0x2 ，回车
-  然后打开你的OC配置文件，把对应有关CFG未解锁的两个选项给去掉，重启就算完成了
+  改变参数值执行命令格式 setup_var_cv [Name] [VarStoreInfo (VarOffset/VarName)] [Option] [Option]，所以执行如下
+    然后现在操作解锁cfg lock，将 0x1 转为 0x0 ，输入 setup_var_cv CpuSetup 0x3E 0x1 0x0 ，回车
+    然后现在操作修改 DVMT 为最大值 ，将 0x2 转为 0x2 ，输入  setup_var_cv SaSetup 0x107 0x2 0x2 ，回车
+    然后打开你的OC配置文件，把对应有关CFG未解锁的两个选项给去掉，重启就算完成了
   
 仅限 HP Pavilion Gaming Laptop 15-dk0210tx 解锁使用
 其他型号和品牌电脑，请按照以上步骤测试
-将预分配的 DVMT 设置为 64M：setup_var_cv SaSetup 0x107 0x2 0x2
 禁用 CFG 锁定： setup_var_cv CpuSetup 0x3E 0x1 0x0
+将预分配的 DVMT 设置为 64M：setup_var_cv SaSetup 0x107 0x2 0x2
