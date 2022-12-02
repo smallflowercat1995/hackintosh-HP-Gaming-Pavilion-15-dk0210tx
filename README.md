@@ -15,7 +15,8 @@
 如果你是intel网卡，那在 ventura 的配置应该是这样的  
 <img width="964" alt="image" title="intel" src="https://user-images.githubusercontent.com/94947393/205294387-150b0bc5-4517-43a8-9082-b0403ec64484.png">   
 你如果已经将intel网卡替换成了 博通网卡 然而买错了不能免驱的话，网卡配置是这样的：  
-<img width="964" alt="image" title="Broadcom" src="https://user-images.githubusercontent.com/94947393/201841163-97df13ad-4a79-4dab-af6b-25089f28a4b2.png">     
+<img width="964" alt="image" title="Broadcom" src="https://user-images.githubusercontent.com/94947393/201841163-97df13ad-4a79-4dab-af6b-25089f28a4b2.png">   
+
 3.本机cfglock已经通过  `opencore debug 流程` -> `02DVMT cfg unlock` 步骤解锁了，并未勾选 oc 配置 `Kernel` -> `Quirks` -> `AppleXcpmCfgLock`  
 
 4.若你的机器没有解锁cfglocal你需要勾选 oc 配置 `Kernel` -> `Quirks` -> `AppleXcpmCfgLock`
