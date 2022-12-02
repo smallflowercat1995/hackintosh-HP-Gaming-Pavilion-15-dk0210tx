@@ -47,9 +47,15 @@ WiFi and Bluetooth
 Broadcom
     AirportBrcmFixup
         https://github.com/acidanthera/AirportBrcmFixup/releases
-
     BrcmPatchRAM
         https://github.com/acidanthera/BrcmPatchRAM/releases
+	
+# intel 如果你想用intel网卡的话
+    itlwm
+        https://github.com/OpenIntelWireless/itlwm/releases
+    IntelBluetoothFirmware
+        https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases
+    
 
 Extras
 
