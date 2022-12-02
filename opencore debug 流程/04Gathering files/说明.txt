@@ -53,6 +53,8 @@ Broadcom
 # intel 如果你想用intel网卡的话
     itlwm
         https://github.com/OpenIntelWireless/itlwm/releases
+    BrcmPatchRAM
+        https://github.com/acidanthera/BrcmPatchRAM/releases
     IntelBluetoothFirmware
         https://github.com/OpenIntelWireless/IntelBluetoothFirmware/releases
     
