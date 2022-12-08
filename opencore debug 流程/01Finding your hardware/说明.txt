@@ -37,7 +37,7 @@ Audio Codec
     Realtek ALC285 @ Intel Cannon Point PCH - cAVS (Audio, Voice, Speech) [B0]	PCI
 
 Network Controller models
-    Broadcom BCM43224AG 802.11a/b/g/draft-n Wireless Network Adapter	PCI
+    Broadcom BCM4360 802.11ac Wireless Network Adapter	PCI
     Realtek RTL8168/8111 PCI-E Gigabit Ethernet Adapter (PHY: Realtek RTL8111)	PCI
 
 Drive Model
