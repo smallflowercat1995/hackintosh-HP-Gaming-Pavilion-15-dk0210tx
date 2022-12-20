@@ -1,5 +1,5 @@
 # hackintosh-HP-Gaming-Pavilion-15-dk0210tx
-黑苹果 ventura 光影精灵 HP Gaming Pavilion - 15-dk0210tx  
+黑苹果 ventura 光影精灵5 HP Gaming Pavilion - 15-dk0210tx  
 
 ## 描述
 `EFI` 是调好的 opencore 0.8.7 引导，三码已清，自行更换，清理nvram  
